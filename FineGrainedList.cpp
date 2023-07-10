@@ -13,7 +13,7 @@ int main()
     que->print();
     
     std::thread t1(&FineGrainedQueue::insertIntoMiddle, que, 20, 3);
-    std::thread t2(&FineGrainedQueue::insertIntoMiddle, que, 30, 3);
+    std::thread t2(&FineGrainedQueue::insertIntoMiddle, que, 30, 7);
 
     t1.join();
     t2.join();

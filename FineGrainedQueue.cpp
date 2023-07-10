@@ -88,6 +88,14 @@ void FineGrainedQueue::insertIntoMiddle(int value, int pos)
         cur = cur->next;
         if (cur) // проверили и только потом залочили
             cur->node_mutex->lock();
+        else { // cur - последний элемент, значит pos не найден - вставляем в конец
+            newN->node_mutex->lock();
+            newN->next = old_cur->next;
+            old_cur->next = newN;
+            newN->node_mutex->unlock();
+            old_cur->node_mutex->unlock();
+            return;
+        }
         curPos++;
         old_cur->node_mutex->unlock();
     }
